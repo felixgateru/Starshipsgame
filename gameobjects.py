@@ -7,6 +7,13 @@ INITIAL_METEOR_POSITION = 10
 MAX_METEOR_SPEED = 5
 class GameObject:
 
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.image = None
+        self.width = 0
+        self.height = 0
+
     def load_image(self, filename):
         self.image = pygame.image.load(filename).convert()
         self.width = self.image.get_width()
@@ -14,15 +21,18 @@ class GameObject:
     
     def rect(self):
         """Generates a rectangle indicating the objects dimensions and location"""
-        return pygame.Rect(self.x,self.y,self.width,self.height)
+        return pygame.Rect(self.x, self.y, self.width,self.height)
     
     def draw(self):
-        """Draw the game object at designated points"""
-        self.game.display_surface.blit(self.image,(self.x,self.y))
+        """ draw the game object at the
+            current x, y coordinates """
+        self.game.display_surface.blit(self.image, (self.x, self.y))
+
     
 
 class Starship(GameObject):
     def __init__(self, game):
+        super().__init__()
         self.game = game
         self.x = FRAME_WIDTH/2
         self.y =FRAME_HEIGHT-60
@@ -58,6 +68,7 @@ class Starship(GameObject):
 
 class Meteor(GameObject):
     def __init__(self,game):
+        super().__init__()
         self.game = game
         self.x = random.randint(0,FRAME_WIDTH)
         self.y = INITIAL_METEOR_POSITION
