@@ -52,8 +52,8 @@ class Starship(GameObject):
     
     def move_up(self):
         self.y = self.y - STARSHIP_SPEED
-        if self.y < 0:
-            self.y = 0
+        if self.y < (FRAME_HEIGHT*0.75):
+            self.y = FRAME_HEIGHT *0.75
         
     
     def move_down(self):
@@ -70,7 +70,11 @@ class Meteor(GameObject):
     def __init__(self,game):
         super().__init__()
         self.game = game
-        self.x = random.randint(0,FRAME_WIDTH)
+        self.r1= random.randint(0,FRAME_WIDTH/4)
+        self.r2 = random.randint(FRAME_WIDTH/4 , FRAME_WIDTH/2)
+        self.r3 = random.randint(FRAME_WIDTH/2, FRAME_WIDTH*0.75)
+        self.r4 = random.randint(FRAME_WIDTH*0.75, FRAME_WIDTH)
+        self.x = random.choice([self.r1,self.r2,self.r3,self.r4])
         self.y = INITIAL_METEOR_POSITION
         self.speed = random.randint(1, MAX_METEOR_SPEED)
         self.load_image("meteor.png")
@@ -79,8 +83,27 @@ class Meteor(GameObject):
         self.y = self.y + self.speed
         if self.y > FRAME_HEIGHT:
             self.y = INITIAL_METEOR_POSITION
+            self.r1= random.randint(0,FRAME_WIDTH/4)
+            self.r2 = random.randint(FRAME_WIDTH/4 , FRAME_WIDTH/2)
+            self.r3 = random.randint(FRAME_WIDTH/2, FRAME_WIDTH*0.75)
+            self.r4 = random.randint(FRAME_WIDTH*0.75, FRAME_WIDTH)
+            self.x = random.choice([self.r1,self.r2,self.r3,self.r4])
     
     def __str__(self):
         return(f"Meteor , {self.x}, {self.y}")
 
+
+class Bullet(GameObject):
+    def __init__(self, game):
+        super().__init__()
+        self.game = game
+        self.x = 0
+        self.y =0
+        self.load_image("bullet.png")
+        self.speed = 10
+    
+    def move_up(self):
+        self.y = self.y - self.speed
+        if self.y < 0:
+            self.game.bullets.pop(-1)
 
