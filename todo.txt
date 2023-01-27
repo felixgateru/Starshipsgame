@@ -1,4 +1,5 @@
 Better file associations
 
+Fix game objects.py
 
 
