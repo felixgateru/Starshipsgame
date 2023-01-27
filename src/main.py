@@ -1,7 +1,8 @@
 import pygame
+import os
 from pygame import mixer
 import time
-from gameobjects import Starship, Meteor, Bullet
+from src.gameobjects import Starship, Meteor, Bullet
 REFRESH_RATE = 30
 FRAME_WIDTH = 600
 FRAME_HEIGHT = 400
@@ -25,9 +26,9 @@ class Game:
         self.starship.draw()
         self.meteors = [Meteor(self) for _ in range(0, INITIAL_NUMBER_OF_METEORS)]
         self.meteor_count = len(self.meteors)
-        mixer.music.load('background.mp3')
+        mixer.music.load(os.path.join("resources","background.mp3"))
         mixer.music.play(-1)
-        self.bullet_sound = mixer.Sound("laser.wav")
+        self.bullet_sound = mixer.Sound(os.path.join("resources","laser.wav"))
     def _check_for_collision(self):
         """ Checks to see if any of the meteors have collided with the starship """
         result = False
@@ -149,7 +150,7 @@ class Game:
                         self.bullets.remove(bullet)
                         self.score += 20 
             if self._check_for_collision():
-                explosion_sound= mixer.Sound("explosion.wav")
+                explosion_sound= mixer.Sound("resources\explosion.wav")
                 explosion_sound.play()
                 if chances == 0:
                     self.meteors.clear()

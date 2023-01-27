@@ -1,4 +1,4 @@
-import pygame, random
+import pygame, random, os
 
 FRAME_WIDTH = 600
 FRAME_HEIGHT = 400
@@ -36,7 +36,7 @@ class Starship(GameObject):
         self.game = game
         self.x = FRAME_WIDTH/2
         self.y =FRAME_HEIGHT-60
-        self.load_image("starship.png") 
+        self.load_image("resources\starship.png") 
     
     def move_right(self):
         self.x =self.x + STARSHIP_SPEED
@@ -77,7 +77,7 @@ class Meteor(GameObject):
         self.x = random.choice([self.r1,self.r2,self.r3,self.r4])
         self.y = INITIAL_METEOR_POSITION
         self.speed = random.randint(1, MAX_METEOR_SPEED)
-        self.load_image("meteor.png")
+        self.load_image(os.path.join("resources","meteor.png"))
     
     def move_down(self):
         self.y = self.y + self.speed
@@ -99,7 +99,7 @@ class Bullet(GameObject):
         self.game = game
         self.x = 0
         self.y =0
-        self.load_image("bullet.png")
+        self.load_image(os.path.join("resources","bullet.png"))
         self.speed = 10
     
     def move_up(self):
