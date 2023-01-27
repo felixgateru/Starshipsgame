@@ -1,7 +1,6 @@
 import os
 import pygame
 
-
 class Menu():
     def __init__(self,game):
         self.game = game
@@ -24,7 +23,7 @@ class MainMenu(Menu):
         super().__init__(game)
         self.state ="Start"
         self.startx, self.starty = self.mid_w,self.mid_h +30
-        self.optionsx, self.optionsy = self.mid_w, self.mid_h +50
+        self.optionsx, self.optionsy = self.mid_w, self.mid_h + 50
         self.creditsx, self.creditsy = self.mid_w, self.mid_h + 70
         self.cursor_rect.midtop = (self.startx+self.offset, self.starty)
     
@@ -96,7 +95,7 @@ class OptionsMenu(Menu):
         if self.game.BACK_KEY:
             self.game.curr_menu = self.game.main_menu
             self.run_display = False
-        elif self.game.UPKEY or self.game.DOWN_KEY:
+        elif self.game.UP_KEY or self.game.DOWN_KEY:
             if self.state == "Volume":
                 self.state = "Controls"
                 self.cursor_rect.midtop = (self.controlsx+self.offset,self.controlsy)
@@ -117,9 +116,9 @@ class CreditsMenu(Menu):
             if self.game.START_KEY or self.game.BACK_KEY:
                 self.game.curr_menu = self.game.main_menu
                 self.run_display =False
-            self.game.display.fill(self.game.black_colour)
+            self.game.game_surface.fill(self.game.black_colour)
             self.game.draw_text("Credits",20,self.game.frame_width/2, self.game.frame_height/2 - 20)
-            self.game.draw_text("Made by OH", self.game.frame_width/2, self.game.frame_height/2 + 10)
+            self.game.draw_text("Made by OH",20, self.game.frame_width/2, self.game.frame_height/2 + 10)
             self.blit_screen()
             
     

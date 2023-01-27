@@ -22,7 +22,8 @@ class Game:
         self.background_Object = ScrollingBackGround(self.frame_height+60)
         self.background_time = pygame.time.Clock().tick(self.refresh_rate)/2500.0
         print("Initialising the display:")
-        self.game_surface = pygame.Surface((self.frame_width,self.frame_height))
+        self.game_surface = pygame.Surface(
+            (self.frame_width, self.frame_height))
         self.display_surface = pygame.display.set_mode(
             (self.frame_width, self.frame_height))
         pygame.mouse.set_visible(0)
@@ -49,16 +50,16 @@ class Game:
         self.options = OptionsMenu(self)
         self.credits = CreditsMenu(self)
         self.curr_menu = self.main_menu
-    
+
     def reset_keys(self):
-        self.BACK_KEY,self.START_KEY,self.UP_KEY,self.DOWN_KEY = False,False,False,False
-    
-    def draw_text(self,text,size,x,y):
-        font = pygame.font.Font(self.font_name,size)
+        self.BACK_KEY, self.START_KEY, self.UP_KEY, self.DOWN_KEY = False, False, False, False
+
+    def draw_text(self, text, size, x, y):
+        font = pygame.font.Font(self.font_name, size)
         text_surface = font.render(text, True, self.white_colour)
         text_rect = text_surface.get_rect()
-        text_rect.center = (x,y)
-        self.game_surface.blit(text_surface,text_rect)
+        text_rect.center = (x, y)
+        self.game_surface.blit(text_surface, text_rect)
 
     def _check_for_collision(self):
         """ Checks to see if any of the meteors have collided with the starship """
@@ -114,7 +115,7 @@ class Game:
                 print("Exiting the game", '.'*23)
                 self.running = False
                 self.playing = False
-                self.curr_menu.run_display  =False
+                self.curr_menu.run_display = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     print("Received exit event", event)
@@ -132,7 +133,7 @@ class Game:
                 elif event.key == pygame.K_w:
                     self.UP_KEY = True
                 elif event.key == pygame.K_s:
-                    self.DOWN_KEY == True
+                    self.DOWN_KEY = True
                 elif event.key == pygame.K_RETURN:
                     self.START_KEY = True
                 elif event.key == pygame.K_BACKSPACE:
@@ -145,11 +146,10 @@ class Game:
                     self.bullet.x = self.starship.x - 5 + self.starship.width/2
                     self.bullet.y = self.starship.y + self.starship.height/2
                     self.bullets.append(self.bullet)
-        
 
     def gameplay(self):
-        self.playing = True
-        #starship_collided = False
+        # self.playing = True
+        starship_collided = False
         count = 0
         chances = 0
 
@@ -207,6 +207,7 @@ class Game:
                     self._display_message("Your Score:"+str(self.score))
 
                     self.playing = False
+                    self.runnng =False
 
                 chances += 1
 
