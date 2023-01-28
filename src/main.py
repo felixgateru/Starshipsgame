@@ -148,12 +148,11 @@ class Game:
                     self.bullets.append(self.bullet)
 
     def gameplay(self):
-        # self.playing = True
         starship_collided = False
         count = 0
         chances = 0
 
-        while self.playing:  # and not starship_collided:
+        while self.playing  and not starship_collided:
             count += 1
             self.background_Object.updateCoords(
                 self.background_speed, self.background_time)
@@ -207,7 +206,8 @@ class Game:
                     self._display_message("Your Score:"+str(self.score))
 
                     self.playing = False
-                    self.runnng =False
+                    self.runnng = False
+                    starship_collided = True
 
                 chances += 1
 
@@ -222,6 +222,8 @@ class Game:
             self.reset_keys()
             self.clock.tick(self.refresh_rate)
 
-       # pygame.quit()
+        #pygame.quit()
+        self.reset_keys()
         print("The game has ended")
         print("The game has ended")
+        print(self.playing)
