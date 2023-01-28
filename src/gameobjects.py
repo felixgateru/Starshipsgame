@@ -99,7 +99,7 @@ class Bullet(GameObject):
         self.game = game
         self.x = 0
         self.y =0
-        self.load_image(os.path.join("resources","bullet.png"))
+        self.load_image(os.path.join("resources","laser.png"))
         self.speed = 10
     
     def move_up(self):
