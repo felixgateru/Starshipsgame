@@ -11,3 +11,10 @@
 
 ### Game Play
 ![Game Play](/documentation/gameplay.png)
+
+
+## To implement 
+
+- [ ] To create explosion animation
+- [ ] To solve life after death
+- [ ] To implement options menu
